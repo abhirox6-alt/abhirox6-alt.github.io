@@ -50,19 +50,12 @@
     }
 
     .dragon-logo {
-      width: 80px;
-      height: 95px;
-      margin: 0 auto 10px;
+      width: 300px;
+      height: auto;
+      margin: 0 auto 20px;
       display: block;
     }
 
-    .logo-text {
-      font-size: 48px;
-      font-weight: 800;
-      color: var(--draconic-orange);
-      letter-spacing: -0.02em;
-      text-transform: uppercase;
-    }
 
     .generator-header h1 {
       color: var(--draconic-orange);
@@ -180,9 +173,55 @@
   <div class="generator-container">
     <div class="generator-header">
       <div class="logo-container">
-        <!-- Dragon Logo as Base64 -->
-        <img class="dragon-logo" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMiIgZGF0YS1uYW1lPSJMYXllciAyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA5NS40NCI+CiAgPGRlZnM+CiAgICA8c3R5bGU+CiAgICAgIC5jbHMtMSB7CiAgICAgICAgZmlsbDogI2ZmNmQwMDsKICAgICAgfQogICAgPC9zdHlsZT4KICA8L2RlZnM+CiAgPGcgaWQ9IkxheWVyXzEtMiIgZGF0YS1uYW1lPSJMYXllciAxIj4KICAgIDxnPgogICAgICA8cmVjdCBjbGFzcz0iY2xzLTEiIHg9IjYzLjQ5IiB5PSI5Mi4xIiB3aWR0aD0iMy41IiBoZWlnaHQ9IjMuMzQiLz4KICAgICAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSI2My40OSIgeT0iOC4wMyIgd2lkdGg9IjMuNSIgaGVpZ2h0PSI1LjY2Ii8+CiAgICAgIDxyZWN0IGNsYXNzPSJjbHMtMSIgeD0iNjMuNDkiIHk9IjE5LjAyIiB3aWR0aD0iMy41IiBoZWlnaHQ9IjM4Ljc5Ii8+CiAgICAgIDxyZWN0IGNsYXNzPSJjbHMtMSIgeD0iNzAuNSIgeT0iMTMuNyIgd2lkdGg9IjMuNSIgaGVpZ2h0PSI5LjQyIi8+CiAgICAgIDxyZWN0IGNsYXNzPSJjbHMtMSIgeD0iNzAuNSIgeT0iNDIuMTkiIHdpZHRoPSIzLjUiIGhlaWdodD0iMzMuMzkiLz4KICAgICAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSI0Mi4xMSIgeT0iMjMuMTIiIHdpZHRoPSIzLjUiIGhlaWdodD0iMzguODgiLz4KICAgICAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSI0Mi4xMSIgeT0iODQuNjQiIHdpZHRoPSIzLjUiIGhlaWdodD0iMTAuOCIvPgogICAgICA8cmVjdCBjbGFzcz0iY2xzLTEiIHg9IjQyLjExIiB5PSI4LjAzIiB3aWR0aD0iMy41IiBoZWlnaHQ9IjIuNDIiLz4KICAgICAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSIzNS4wOSIgeT0iMTkuMDIiIHdpZHRoPSIzLjUiIGhlaWdodD0iMjIuNzYiLz4KICAgICAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSIzNS4wOSIgeT0iNDUuNjQiIHdpZHRoPSIzLjUiIGhlaWdodD0iMTYuMzYiLz4KICAgICAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSIzNS4wOSIgeT0iODguOTYiIHdpZHRoPSIzLjUiIGhlaWdodD0iNi40NyIvPgogICAgICA8cmVjdCBjbGFzcz0iY2xzLTEiIHg9IjM1LjA5IiB5PSI3Mi42NSIgd2lkdGg9IjMuNSIgaGVpZ2h0PSIyLjkzIi8+CiAgICAgIDxyZWN0IGNsYXNzPSJjbHMtMSIgeD0iNTYuNDciIHk9IjkwLjM3IiB3aWR0aD0iMy41IiBoZWlnaHQ9IjUuMDciLz4KICAgICAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSI1Ni40NyIgeT0iMi45OSIgd2lkdGg9IjMuNSIgaGVpZ2h0PSI1OS4wMSIvPgogICAgICA8cmVjdCBjbGFzcz0iY2xzLTEiIHg9IjU2LjQ3IiB5PSI3Mi42NSIgd2lkdGg9IjMuNSIgaGVpZ2h0PSIyLjkzIi8+CiAgICAgIDxyZWN0IGNsYXNzPSJjbHMtMSIgeD0iNzYuOTIiIHk9IjE5LjAyIiB3aWR0aD0iMy41IiBoZWlnaHQ9IjguMjEiLz4KICAgICAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSI3Ni45MiIgeT0iNzIuNjUiIHdpZHRoPSIzLjUiIGhlaWdodD0iMi45MyIvPgogICAgICA8cmVjdCBjbGFzcz0iY2xzLTEiIHg9IjI4LjA4IiB5PSIxMy43IiB3aWR0aD0iMy41IiBoZWlnaHQ9IjI3LjA2Ii8+CiAgICAgIDxyZWN0IGNsYXNzPSJjbHMtMSIgeD0iMjguMDgiIHk9IjQ4LjA3IiB3aWR0aD0iMy41IiBoZWlnaHQ9IjI3LjUxIi8+CiAgICAgIDxyZWN0IGNsYXNzPSJjbHMtMSIgeD0iMjguMDgiIHk9IjkyLjAyIiB3aWR0aD0iMy41IiBoZWlnaHQ9IjMuNDIiLz4KICAgICAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSIyMS4wNiIgeT0iMTAuNDgiIHdpZHRoPSIzLjUiIGhlaWdodD0iMzAuMjUiLz4KICAgICAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSIyMS4wNiIgeT0iODguNzQiIHdpZHRoPSIzLjUiIGhlaWdodD0iNi43Ii8+CiAgICAgIDxyZWN0IGNsYXNzPSJjbHMtMSIgeD0iMjEuMDYiIHk9IjUyLjI5IiB3aWR0aD0iMy41IiBoZWlnaHQ9IjEyLjciLz4KICAgICAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSIxNC4wNCIgeT0iODIuMzYiIHdpZHRoPSIzLjUiIGhlaWdodD0iMTAuMTciLz4KICAgICAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSIxNC4wNCIgeT0iNTYuNTgiIHdpZHRoPSIzLjUiIGhlaWdodD0iMTQuNjYiLz4KICAgICAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSIxNC4wNCIgeT0iMTMuNyIgd2lkdGg9IjMuNSIgaGVpZ2h0PSIyOC43MyIvPgogICAgICA8cmVjdCBjbGFzcz0iY2xzLTEiIHg9IjcuMDIiIHk9IjIwLjg5IiB3aWR0aD0iMy41IiBoZWlnaHQ9IjIzLjgzIi8+CiAgICAgIDxyZWN0IGNsYXNzPSJjbHMtMSIgeD0iNy4wMiIgeT0iNjIiIHdpZHRoPSIzLjUiIGhlaWdodD0iMjYuNzQiLz4KICAgICAgPHJlY3QgY2xhc3M9ImNscy0xIiB5PSIzMS41MSIgd2lkdGg9IjMuNSIgaGVpZ2h0PSIxNi43MyIvPgogICAgICA8cmVjdCBjbGFzcz0iY2xzLTEiIHg9IjQ5LjQ1IiB5PSIyOS41NyIgd2lkdGg9IjMuNSIgaGVpZ2h0PSI0Ni4wMiIvPgogICAgICA8cmVjdCBjbGFzcz0iY2xzLTEiIHg9IjQ5LjQ1IiB5PSI4LjAzIiB3aWR0aD0iMy41IiBoZWlnaHQ9IjUuNjYiLz4KICAgICAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSI0OS4xMyIgeT0iODguNzQiIHdpZHRoPSIzLjUiIGhlaWdodD0iNi43Ii8+CiAgICAgIDxyZWN0IGNsYXNzPSJjbHMtMSIgeD0iNDkuNDUiIHdpZHRoPSIzLjUiIGhlaWdodD0iMi45OSIvPgogICAgPC9nPgogIDwvZz4KPC9zdmc+" alt="Draconic Dragon">
-        <div class="logo-text">DRACONIC</div>
+        <!-- Complete Draconic Logo with Symbol and Typemark -->
+        <svg class="dragon-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 472.12 95.44">
+          <g>
+            <rect fill="#ff6d00" x="63.49" y="92.1" width="3.5" height="3.34"/>
+            <rect fill="#ff6d00" x="63.49" y="8.03" width="3.5" height="5.66"/>
+            <rect fill="#ff6d00" x="63.49" y="19.02" width="3.5" height="38.79"/>
+            <rect fill="#ff6d00" x="70.5" y="13.7" width="3.5" height="9.42"/>
+            <rect fill="#ff6d00" x="70.5" y="42.19" width="3.5" height="33.39"/>
+            <rect fill="#ff6d00" x="42.11" y="23.12" width="3.5" height="38.88"/>
+            <rect fill="#ff6d00" x="42.11" y="84.64" width="3.5" height="10.8"/>
+            <rect fill="#ff6d00" x="42.11" y="8.03" width="3.5" height="2.42"/>
+            <rect fill="#ff6d00" x="35.09" y="19.02" width="3.5" height="22.76"/>
+            <rect fill="#ff6d00" x="35.09" y="45.64" width="3.5" height="16.36"/>
+            <rect fill="#ff6d00" x="35.09" y="88.96" width="3.5" height="6.47"/>
+            <rect fill="#ff6d00" x="35.09" y="72.65" width="3.5" height="2.93"/>
+            <rect fill="#ff6d00" x="56.47" y="90.37" width="3.5" height="5.07"/>
+            <rect fill="#ff6d00" x="56.47" y="2.99" width="3.5" height="59.01"/>
+            <rect fill="#ff6d00" x="56.47" y="72.65" width="3.5" height="2.93"/>
+            <rect fill="#ff6d00" x="76.92" y="19.02" width="3.5" height="8.21"/>
+            <rect fill="#ff6d00" x="76.92" y="72.65" width="3.5" height="2.93"/>
+            <rect fill="#ff6d00" x="28.08" y="13.7" width="3.5" height="27.06"/>
+            <rect fill="#ff6d00" x="28.08" y="48.07" width="3.5" height="27.51"/>
+            <rect fill="#ff6d00" x="28.08" y="92.02" width="3.5" height="3.42"/>
+            <rect fill="#ff6d00" x="21.06" y="10.48" width="3.5" height="30.25"/>
+            <rect fill="#ff6d00" x="21.06" y="88.74" width="3.5" height="6.7"/>
+            <rect fill="#ff6d00" x="21.06" y="52.29" width="3.5" height="12.7"/>
+            <rect fill="#ff6d00" x="14.04" y="82.36" width="3.5" height="10.17"/>
+            <rect fill="#ff6d00" x="14.04" y="56.58" width="3.5" height="14.66"/>
+            <rect fill="#ff6d00" x="14.04" y="13.7" width="3.5" height="28.73"/>
+            <rect fill="#ff6d00" x="7.02" y="20.89" width="3.5" height="23.83"/>
+            <rect fill="#ff6d00" x="7.02" y="62" width="3.5" height="26.74"/>
+            <rect fill="#ff6d00" y="31.51" width="3.5" height="16.73"/>
+            <rect fill="#ff6d00" x="49.45" y="29.57" width="3.5" height="46.02"/>
+            <rect fill="#ff6d00" x="49.45" y="8.03" width="3.5" height="5.66"/>
+            <rect fill="#ff6d00" x="49.13" y="88.74" width="3.5" height="6.7"/>
+            <rect fill="#ff6d00" x="49.45" width="3.5" height="2.99"/>
+          </g>
+          <g>
+            <path fill="#ff6d00" d="M143.53,22.58h-7.07v-3.53h-35.33v56.53h35.33v-3.53h7.07v-3.53h3.53V26.12h-3.53v-3.53ZM136.47,68.51h-3.53v3.53h-21.2V22.58h21.2v3.53h3.53v42.4Z"/>
+            <polygon fill="#ff6d00" points="387.32 19.05 387.32 57.92 383.79 57.92 383.79 50.85 380.25 50.85 380.25 43.78 376.72 43.78 376.72 36.72 373.19 36.72 373.19 29.65 369.66 29.65 369.66 22.58 366.12 22.58 366.12 19.05 355.52 19.05 355.52 75.58 366.12 75.58 366.12 33.18 369.66 33.18 369.66 40.25 373.19 40.25 373.19 47.32 376.72 47.32 376.72 54.38 380.25 54.38 380.25 61.45 383.79 61.45 383.79 68.51 387.32 68.51 387.32 75.58 397.92 75.58 397.92 19.05 387.32 19.05"/>
+            <polygon fill="#ff6d00" points="245.99 22.58 242.46 22.58 242.46 19.05 214.2 19.05 214.2 22.58 210.66 22.58 210.66 26.12 207.13 26.12 207.13 75.58 217.73 75.58 217.73 50.85 221.26 50.85 221.26 47.32 217.73 47.32 217.73 26.12 221.26 26.12 221.26 22.58 235.39 22.58 235.39 26.12 238.93 26.12 238.93 47.32 235.39 47.32 235.39 50.85 238.93 50.85 238.93 75.58 249.53 75.58 249.53 26.12 245.99 26.12 245.99 22.58"/>
+            <rect fill="#ff6d00" x="221.26" y="43.78" width="14.13" height="3.53"/>
+            <path fill="#ff6d00" d="M196.53,22.58h-7.07v-3.53h-35.33v56.53h10.6v-24.73h21.2v3.53h3.53v21.2h10.6v-17.67h-3.53v-3.53h-3.53v-3.53h-3.53v-3.53h7.07v-3.53h3.53v-17.67h-3.53v-3.53ZM189.46,43.78h-3.53v3.53h-21.2v-24.73h21.2v3.53h3.53v17.67Z"/>
+            <polygon fill="#ff6d00" points="295.46 22.58 291.93 22.58 291.93 19.05 263.66 19.05 263.66 22.58 260.13 22.58 260.13 26.12 256.59 26.12 256.59 68.51 260.13 68.51 260.13 72.05 263.66 72.05 263.66 75.58 291.93 75.58 291.93 72.05 295.46 72.05 295.46 68.51 298.99 68.51 298.99 54.38 288.39 54.38 288.39 68.51 284.86 68.51 284.86 72.05 270.73 72.05 270.73 68.51 267.19 68.51 267.19 26.12 270.73 26.12 270.73 22.58 284.86 22.58 284.86 26.12 288.39 26.12 288.39 40.25 298.99 40.25 298.99 26.12 295.46 26.12 295.46 22.58"/>
+            <polygon fill="#ff6d00" points="472.12 40.25 472.12 26.12 468.58 26.12 468.58 22.58 465.05 22.58 465.05 19.05 436.79 19.05 436.79 22.58 433.25 22.58 433.25 26.12 429.72 26.12 429.72 68.51 433.25 68.51 433.25 72.05 436.79 72.05 436.79 75.58 465.05 75.58 465.05 72.05 468.58 72.05 468.58 68.51 472.12 68.51 472.12 54.38 461.52 54.38 461.52 68.51 457.98 68.51 457.98 72.05 443.85 72.05 443.85 68.51 440.32 68.51 440.32 26.12 443.85 26.12 443.85 22.58 457.98 22.58 457.98 26.12 461.52 26.12 461.52 40.25 472.12 40.25"/>
+            <path fill="#ff6d00" d="M344.92,22.58h-3.53v-3.53h-28.27v3.53h-3.53v3.53h-3.53v42.4h3.53v3.53h3.53v3.53h28.27v-3.53h3.53v-3.53h3.53V26.12h-3.53v-3.53ZM337.86,68.51h-3.53v3.53h-14.13v-3.53h-3.53V26.12h3.53v-3.53h14.13v3.53h3.53v42.4Z"/>
+            <polygon fill="#ff6d00" points="404.99 19.05 404.99 22.58 408.52 22.58 408.52 72.05 404.99 72.05 404.99 75.58 422.65 75.58 422.65 72.05 419.12 72.05 419.12 22.58 422.65 22.58 422.65 19.05 404.99 19.05"/>
+          </g>
+        </svg>
       </div>
       <h1>Brand Document Generator</h1>
       <p>Transform any document into Draconic-branded HTML</p>
