@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Draconic Documents</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    /* Import Bricolage Grotesque for body text - Draconic brand font */
+    @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200;12..96,400;12..96,700&display=swap');
+
+    /* CSS Variables - Draconic Brand Colors */
+    :root {
+      --draconic-orange: #FF6D00;
+      --draconic-dark: #1f1108;
+      --draconic-brown-1: #54301e;
+      --draconic-brown-2: #825037;
+      --draconic-brown-3: #876959;
+      --draconic-light: #f7d9cb;
+      --draconic-accent: #e2ab8d;
+    }
+
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      background: #1f1108; /* Burnt Brown - main brand color */
+      color: var(--draconic-light);
+      line-height: 1.6;
+      font-weight: 400;
+      padding: 40px;
+    }
+
+    /* Document selector */
+    .doc-selector {
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    select {
+      background: var(--draconic-brown-2);
+      color: var(--draconic-light);
+      border: 2px solid var(--draconic-orange);
+      padding: 10px 20px;
+      font-size: 16px;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* Preview area matching the React app exactly */
+    .preview {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 2rem;
+      margin: 0 auto;
+      max-width: 1200px;
+    }
+
+    .preview h1, .preview h2, .preview h3 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 700;
+      color: var(--draconic-orange);
+      margin: 1.5rem 0 1rem;
+    }
+
+    .preview h1 { 
+      font-size: 2.5rem; 
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .preview h2 { 
+      font-size: 2rem; 
+      border-left: 4px solid var(--draconic-orange);
+      padding-left: 1rem;
+      background: linear-gradient(90deg, rgba(255, 109, 0, 0.1) 0%, transparent 50%);
+    }
+    .preview h3 { 
+      font-size: 1.5rem;
+      color: var(--draconic-accent);
+    }
+
+    .preview p {
+      margin-bottom: 1rem;
+      color: var(--draconic-light);
+    }
+
+    .preview code {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-family: 'Monaco', 'Consolas', monospace;
+      color: var(--draconic-orange);
+    }
+
+    .preview pre {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1rem 0;
+      border-left: 4px solid var(--draconic-orange);
+    }
+
+    .preview pre code {
+      background: none;
+      padding: 0;
+      color: var(--draconic-light);
+    }
+
+    .preview blockquote {
+      border-left: 4px solid var(--draconic-orange);
+      padding-left: 1rem;
+      margin: 1rem 0;
+      color: var(--draconic-accent);
+      font-style: italic;
+    }
+
+    .preview ul, .preview ol {
+      margin: 1rem 0 1rem 2rem;
+    }
+
+    .preview li {
+      margin-bottom: 0.5rem;
+    }
+
+    .preview strong, .preview b {
+      color: var(--draconic-orange);
+      font-weight: 700;
+    }
+
+    .preview em, .preview i {
+      color: var(--draconic-accent);
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 3px solid var(--draconic-orange);
+    }
+
+    .logo {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--draconic-orange);
+      letter-spacing: -0.02em;
+    }
+
+    .tagline {
+      color: var(--draconic-accent);
+      margin-top: 10px;
+    }
+
+    /* Print button */
+    .print-btn {
+      background: var(--draconic-orange);
+      color: var(--draconic-dark);
+      border: none;
+      padding: 1rem 3rem;
+      font-size: 1.2rem;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 700;
+      border-radius: 50px;
+      cursor: pointer;
+      margin: 40px auto;
+      display: block;
+    }
+
+    .print-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(255, 109, 0, 0.5);
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        padding: 0;
+      }
+      
+      .doc-selector, .print-btn {
+        display: none !important;
+      }
+      
+      .header {
+        margin-bottom: 20px;
+      }
+      
+      .preview {
+        border: none;
+        padding: 0;
+        max-width: 100%;
+      }
+      
+      @page {
+        margin: 0.75in;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">draconic</div>
+    <div class="tagline">AI Trading Intelligence</div>
+  </div>
+
+  <div class="doc-selector">
+    <select id="docSelect" onchange="loadDocument()">
+      <option value="">Select a document...</option>
+      <option value="draconic-content-strategy-v2.md">Content Strategy V2</option>
+      <option value="draconic-firefighting-strategy.md">Firefighting Strategy</option>
+      <option value="draconic-launch-playbook.md">Launch Playbook</option>
+      <option value="draconic-multi-audience-strategy-agency.md">Multi-Audience Strategy</option>
+      <option value="draconic-readme-updated.md">README</option>
+    </select>
+  </div>
+
+  <div id="preview" class="preview" style="display: none;"></div>
+  
+  <button class="print-btn" style="display: none;" onclick="window.print()">
+    Print to PDF
+  </button>
+
+  <script>
+    const documents = {
+      'draconic-content-strategy-v2.md': `fetch from file`,
+      'draconic-firefighting-strategy.md': `fetch from file`,
+      'draconic-launch-playbook.md': `fetch from file`,
+      'draconic-multi-audience-strategy-agency.md': `fetch from file`,
+      'draconic-readme-updated.md': `fetch from file`
+    };
+
+    async function loadDocument() {
+      const select = document.getElementById('docSelect');
+      const preview = document.getElementById('preview');
+      const printBtn = document.querySelector('.print-btn');
+      
+      if (!select.value) {
+        preview.style.display = 'none';
+        printBtn.style.display = 'none';
+        return;
+      }
+
+      // In a real implementation, you'd fetch the file
+      // For now, you can manually copy-paste the markdown content
+      const response = await fetch('/Final deliverables/' + select.value).catch(() => null);
+      
+      if (response && response.ok) {
+        const markdown = await response.text();
+        const html = marked.parse(markdown);
+        preview.innerHTML = html;
+        preview.style.display = 'block';
+        printBtn.style.display = 'block';
+      } else {
+        // Fallback message
+        preview.innerHTML = '<p>Please open this file directly in your browser and manually paste the markdown content, or use the React app.</p>';
+        preview.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>
