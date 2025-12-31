@@ -5,6 +5,7 @@
   <title>Draconic Brand Document Generator</title>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://unpkg.com/mammoth@1.6.0/mammoth.browser.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200;12..96,400;12..96,700&display=swap');
 
@@ -1198,57 +1199,66 @@
     async function generatePDF() {
       const pdfBtn = document.getElementById('pdfBtn');
       const originalText = pdfBtn.textContent;
-      pdfBtn.textContent = 'Generating...';
       pdfBtn.disabled = true;
+
+      // Progress steps
+      const steps = ['Preparing...', 'Rendering...', 'Creating PDF...', 'Finalizing...'];
+      let stepIndex = 0;
+
+      const updateProgress = () => {
+        pdfBtn.textContent = steps[stepIndex];
+        stepIndex = (stepIndex + 1) % steps.length;
+      };
+      updateProgress();
+      const progressInterval = setInterval(updateProgress, 1500);
 
       try {
         const fullHTML = buildFullHTML();
         const fileName = currentFileName || 'document';
 
-        const response = await fetch('/api/generate-pdf', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ html: fullHTML, filename: fileName })
-        });
+        // Create a hidden container to render the HTML
+        const container = document.createElement('div');
+        container.innerHTML = fullHTML;
+        container.style.position = 'absolute';
+        container.style.left = '-9999px';
+        container.style.top = '0';
+        container.style.width = '1200px';
+        document.body.appendChild(container);
 
-        if (!response.ok) {
-          let errorMessage = 'PDF generation failed';
-          try {
-            const errorText = await response.text();
-            // Try to parse as JSON first
-            try {
-              const errorJson = JSON.parse(errorText);
-              errorMessage = errorJson.details || errorJson.error || errorMessage;
-            } catch {
-              // If not JSON, check for common Vercel errors
-              if (errorText.includes('FUNCTION_INVOCATION_TIMEOUT')) {
-                errorMessage = 'Server timeout - document may be too large. Try a smaller document.';
-              } else if (errorText.includes('FUNCTION_INVOCATION_FAILED')) {
-                errorMessage = 'Server error - please try again in a moment.';
-              } else {
-                errorMessage = errorText.substring(0, 200) || errorMessage;
-              }
-            }
-          } catch (e) {
-            // Ignore text parsing errors
-          }
-          throw new Error(errorMessage);
-        }
+        // Wait for fonts to load
+        await document.fonts.ready;
+        await new Promise(r => setTimeout(r, 500));
 
-        const blob = await response.blob();
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `${fileName}.pdf`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
+        // Configure html2pdf options
+        const options = {
+          margin: 0,
+          filename: `${fileName}.pdf`,
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: {
+            scale: 2,
+            useCORS: true,
+            logging: false,
+            backgroundColor: currentBranding.colors.background
+          },
+          jsPDF: {
+            unit: 'in',
+            format: [12, 16],
+            orientation: 'portrait'
+          },
+          pagebreak: { mode: ['css', 'legacy'], avoid: ['tr', 'td', 'li'] }
+        };
+
+        // Generate PDF
+        await html2pdf().set(options).from(container).save();
+
+        // Clean up
+        document.body.removeChild(container);
 
       } catch (error) {
         console.error('PDF error:', error);
         alert('PDF generation failed: ' + error.message);
       } finally {
+        clearInterval(progressInterval);
         pdfBtn.textContent = originalText;
         pdfBtn.disabled = false;
       }
