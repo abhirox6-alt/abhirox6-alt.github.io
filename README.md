@@ -57,60 +57,42 @@ The PDF API uses Puppeteer with Chromium to render HTML and generate PDFs with:
    - Add custom domain in Vercel settings
    - Or use the provided `.vercel.app` URL
 
-## Customizing Branding
+## Customizing Branding (No Code Required!)
 
-To use your own brand instead of Draconic:
+The app includes a built-in **Customize Brand** settings panel. No coding needed!
 
-### 1. Replace Logo
+### Using the Settings Panel
 
-In `index.html`, find and replace the base64 logo:
+1. Click the **"Customize Brand"** button (top right corner)
+2. **Upload your logo** - drag & drop or click to browse (PNG, JPG, SVG)
+3. **Enter your brand name**
+4. **Choose a color theme**:
+   - Draconic (Default) - Dark brown/orange
+   - Corporate Blue - Professional blue theme
+   - Elegant Gold - Black/gold luxury theme
+   - Forest Green - Nature-inspired green
+   - Midnight Purple - Modern purple theme
+   - **Custom** - Pick your own colors with color pickers
+5. Click **Save Changes**
 
+Your settings are saved in your browser and persist across sessions. All generated HTML and PDF documents will use your custom branding.
+
+### For Developers
+
+If you prefer to customize via code:
+
+#### Replace Logo (in index.html)
 ```html
 <img src="data:image/png;base64,YOUR_LOGO_BASE64_HERE" alt="Your Logo">
 ```
 
-To convert your logo to base64:
-```bash
-base64 -i your-logo.png | pbcopy  # macOS
-base64 your-logo.png | xclip      # Linux
-```
-
-### 2. Update Colors
-
-Find the CSS variables in `index.html` and update:
-
+#### Update Colors (CSS variables in index.html)
 ```css
 :root {
-  --brand-dark: #1f1108;      /* Dark background */
-  --brand-orange: #FF6D00;    /* Accent color */
-  --brand-gold: #f5a623;      /* Secondary accent */
-  --brand-cream: #FFF8E7;     /* Light text */
+  --draconic-dark: #1f1108;      /* Background */
+  --draconic-orange: #FF6D00;    /* Accent */
+  --draconic-light: #f7d9cb;     /* Text */
 }
-```
-
-### 3. Update Brand Name
-
-Search and replace "Draconic" with your brand name throughout:
-- `index.html` - Page title, headers, content
-- `package.json` - Project name and description
-
-### 4. Update PDF Styling
-
-In `api/generate-pdf.js`, update the print CSS:
-
-```javascript
-const smartPageBreakCSS = `
-  <style>
-    @media print {
-      body {
-        background: YOUR_DARK_COLOR !important;
-      }
-      .content th {
-        background: YOUR_ACCENT_COLOR !important;
-      }
-    }
-  </style>
-`;
 ```
 
 ## PDF Generation Principles

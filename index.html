@@ -269,6 +269,265 @@
       font-weight: 600;
     }
 
+    /* Settings Button */
+    .settings-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--draconic-brown-2);
+      border: none;
+      border-radius: 8px;
+      padding: 12px 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--draconic-light);
+      font-family: inherit;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+
+    .settings-btn:hover {
+      background: var(--draconic-orange);
+      color: var(--draconic-dark);
+    }
+
+    .settings-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Settings Modal */
+    .settings-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .settings-overlay.active {
+      display: flex;
+    }
+
+    .settings-modal {
+      background: var(--draconic-dark);
+      border: 2px solid var(--draconic-brown-2);
+      border-radius: 16px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 30px;
+    }
+
+    .settings-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid var(--draconic-brown-2);
+    }
+
+    .settings-header h2 {
+      color: var(--draconic-orange);
+      font-size: 1.5rem;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--draconic-light);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 5px;
+      line-height: 1;
+    }
+
+    .close-btn:hover {
+      color: var(--draconic-orange);
+    }
+
+    .settings-section {
+      margin-bottom: 30px;
+    }
+
+    .settings-section h3 {
+      color: var(--draconic-accent);
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+    }
+
+    /* Logo Upload */
+    .logo-upload-area {
+      border: 2px dashed var(--draconic-brown-2);
+      border-radius: 12px;
+      padding: 30px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .logo-upload-area:hover,
+    .logo-upload-area.drag-over {
+      border-color: var(--draconic-orange);
+      background: rgba(255, 109, 0, 0.05);
+    }
+
+    .logo-upload-area img {
+      max-width: 200px;
+      max-height: 80px;
+      margin-bottom: 10px;
+    }
+
+    .logo-upload-area p {
+      color: var(--draconic-accent);
+      font-size: 0.9rem;
+    }
+
+    .logo-upload-area input {
+      display: none;
+    }
+
+    /* Brand Name Input */
+    .brand-input {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid var(--draconic-brown-2);
+      border-radius: 8px;
+      color: var(--draconic-light);
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    .brand-input:focus {
+      outline: none;
+      border-color: var(--draconic-orange);
+    }
+
+    /* Color Presets */
+    .color-presets {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .preset-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 2px solid var(--draconic-brown-2);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .preset-option:hover {
+      border-color: var(--draconic-accent);
+    }
+
+    .preset-option.selected {
+      border-color: var(--draconic-orange);
+      background: rgba(255, 109, 0, 0.1);
+    }
+
+    .preset-option input {
+      display: none;
+    }
+
+    .preset-swatch {
+      display: flex;
+      gap: 3px;
+    }
+
+    .preset-swatch span {
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+    }
+
+    .preset-label {
+      color: var(--draconic-light);
+      font-size: 0.9rem;
+    }
+
+    /* Custom Colors */
+    .custom-colors {
+      display: none;
+      gap: 15px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+
+    .custom-colors.active {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .color-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .color-field label {
+      color: var(--draconic-accent);
+      font-size: 0.85rem;
+    }
+
+    .color-field input[type="color"] {
+      width: 100%;
+      height: 40px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: none;
+    }
+
+    .color-field input[type="color"]::-webkit-color-swatch-wrapper {
+      padding: 0;
+    }
+
+    .color-field input[type="color"]::-webkit-color-swatch {
+      border-radius: 6px;
+      border: 2px solid var(--draconic-brown-2);
+    }
+
+    /* Settings Actions */
+    .settings-actions {
+      display: flex;
+      gap: 15px;
+      justify-content: flex-end;
+      padding-top: 20px;
+      border-top: 2px solid var(--draconic-brown-2);
+    }
+
+    .btn-reset {
+      background: transparent;
+      border: 2px solid var(--draconic-brown-2);
+      color: var(--draconic-light);
+    }
+
+    .btn-reset:hover:not(:disabled) {
+      border-color: var(--draconic-accent);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
     @media (max-width: 768px) {
       .generator-container {
         padding: 20px;
@@ -292,6 +551,123 @@
   </style>
 </head>
 <body>
+  <!-- Settings Button -->
+  <button class="settings-btn" onclick="openSettings()">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+    </svg>
+    Customize Brand
+  </button>
+
+  <!-- Settings Modal -->
+  <div class="settings-overlay" id="settingsOverlay" onclick="closeSettingsOnOverlay(event)">
+    <div class="settings-modal">
+      <div class="settings-header">
+        <h2>Customize Your Brand</h2>
+        <button class="close-btn" onclick="closeSettings()">&times;</button>
+      </div>
+
+      <!-- Logo Upload Section -->
+      <div class="settings-section">
+        <h3>Brand Logo</h3>
+        <div class="logo-upload-area" id="logoUploadArea" onclick="document.getElementById('logoInput').click()">
+          <div id="logoPreview">
+            <p>Drop your logo here or click to browse</p>
+            <p style="font-size: 0.8rem; opacity: 0.7;">PNG, JPG, or SVG (recommended: 300px wide)</p>
+          </div>
+          <input type="file" id="logoInput" accept="image/*" onchange="handleLogoUpload(event)">
+        </div>
+      </div>
+
+      <!-- Brand Name Section -->
+      <div class="settings-section">
+        <h3>Brand Name</h3>
+        <input type="text" class="brand-input" id="brandNameInput" placeholder="Enter your brand name" value="Draconic">
+      </div>
+
+      <!-- Color Theme Section -->
+      <div class="settings-section">
+        <h3>Color Theme</h3>
+        <div class="color-presets" id="colorPresets">
+          <label class="preset-option selected" data-preset="draconic">
+            <input type="radio" name="colorPreset" value="draconic" checked>
+            <div class="preset-swatch">
+              <span style="background: #1f1108;"></span>
+              <span style="background: #FF6D00;"></span>
+              <span style="background: #f7d9cb;"></span>
+            </div>
+            <span class="preset-label">Draconic (Default)</span>
+          </label>
+          <label class="preset-option" data-preset="corporate">
+            <input type="radio" name="colorPreset" value="corporate">
+            <div class="preset-swatch">
+              <span style="background: #1a1a2e;"></span>
+              <span style="background: #0077b6;"></span>
+              <span style="background: #e8f4f8;"></span>
+            </div>
+            <span class="preset-label">Corporate Blue</span>
+          </label>
+          <label class="preset-option" data-preset="elegant">
+            <input type="radio" name="colorPreset" value="elegant">
+            <div class="preset-swatch">
+              <span style="background: #1a1a1a;"></span>
+              <span style="background: #c9a227;"></span>
+              <span style="background: #f5f5f5;"></span>
+            </div>
+            <span class="preset-label">Elegant Gold</span>
+          </label>
+          <label class="preset-option" data-preset="forest">
+            <input type="radio" name="colorPreset" value="forest">
+            <div class="preset-swatch">
+              <span style="background: #1a2f1a;"></span>
+              <span style="background: #2d6a4f;"></span>
+              <span style="background: #e8f5e9;"></span>
+            </div>
+            <span class="preset-label">Forest Green</span>
+          </label>
+          <label class="preset-option" data-preset="midnight">
+            <input type="radio" name="colorPreset" value="midnight">
+            <div class="preset-swatch">
+              <span style="background: #0d0221;"></span>
+              <span style="background: #7b2cbf;"></span>
+              <span style="background: #e0aaff;"></span>
+            </div>
+            <span class="preset-label">Midnight Purple</span>
+          </label>
+          <label class="preset-option" data-preset="custom">
+            <input type="radio" name="colorPreset" value="custom">
+            <div class="preset-swatch">
+              <span style="background: linear-gradient(135deg, #ff0000, #00ff00, #0000ff);"></span>
+            </div>
+            <span class="preset-label">Custom Colors</span>
+          </label>
+        </div>
+
+        <div class="custom-colors" id="customColors">
+          <div class="color-field">
+            <label>Background</label>
+            <input type="color" id="customBg" value="#1f1108">
+          </div>
+          <div class="color-field">
+            <label>Accent</label>
+            <input type="color" id="customAccent" value="#FF6D00">
+          </div>
+          <div class="color-field">
+            <label>Text</label>
+            <input type="color" id="customText" value="#f7d9cb">
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="settings-actions">
+        <button class="btn btn-reset" onclick="resetBranding()">Reset to Draconic</button>
+        <button class="btn btn-primary" onclick="saveBranding()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
   <div class="generator-container">
     <div class="generator-header">
       <div class="logo-container">
@@ -377,6 +753,224 @@
     let currentContent = '';
     let currentFileName = '';
 
+    // ========== BRANDING SETTINGS ==========
+
+    // Default Draconic branding (used as fallback)
+    const defaultBranding = {
+      name: 'Draconic',
+      logo: null, // null means use default SVG
+      preset: 'draconic',
+      colors: {
+        background: '#1f1108',
+        accent: '#FF6D00',
+        text: '#f7d9cb'
+      }
+    };
+
+    // Color presets
+    const colorPresets = {
+      draconic: { background: '#1f1108', accent: '#FF6D00', text: '#f7d9cb' },
+      corporate: { background: '#1a1a2e', accent: '#0077b6', text: '#e8f4f8' },
+      elegant: { background: '#1a1a1a', accent: '#c9a227', text: '#f5f5f5' },
+      forest: { background: '#1a2f1a', accent: '#2d6a4f', text: '#e8f5e9' },
+      midnight: { background: '#0d0221', accent: '#7b2cbf', text: '#e0aaff' }
+    };
+
+    // Current branding state
+    let currentBranding = { ...defaultBranding };
+    let tempLogoData = null; // Temporary storage for uploaded logo
+
+    // Load branding from localStorage on page load
+    function loadBranding() {
+      const saved = localStorage.getItem('documentGeneratorBranding');
+      if (saved) {
+        currentBranding = JSON.parse(saved);
+        applyBrandingToUI();
+      }
+    }
+
+    // Apply branding to the generator UI
+    function applyBrandingToUI() {
+      const root = document.documentElement;
+      root.style.setProperty('--draconic-dark', currentBranding.colors.background);
+      root.style.setProperty('--draconic-orange', currentBranding.colors.accent);
+      root.style.setProperty('--draconic-light', currentBranding.colors.text);
+
+      // Update header text
+      const headerP = document.querySelector('.generator-header p');
+      if (headerP) {
+        headerP.textContent = `Transform your content into beautifully branded ${currentBranding.name} documents`;
+      }
+
+      // Update logo if custom logo exists
+      if (currentBranding.logo) {
+        const logoContainer = document.querySelector('.generator-header .logo-container');
+        if (logoContainer) {
+          logoContainer.innerHTML = `<img src="${currentBranding.logo}" alt="${currentBranding.name}" style="max-height: 60px; max-width: 300px;">`;
+        }
+      }
+    }
+
+    // Settings modal functions
+    function openSettings() {
+      document.getElementById('settingsOverlay').classList.add('active');
+
+      // Populate current values
+      document.getElementById('brandNameInput').value = currentBranding.name;
+
+      // Set color preset
+      const presetOptions = document.querySelectorAll('.preset-option');
+      presetOptions.forEach(opt => {
+        opt.classList.remove('selected');
+        if (opt.dataset.preset === currentBranding.preset) {
+          opt.classList.add('selected');
+          opt.querySelector('input').checked = true;
+        }
+      });
+
+      // Show custom colors if custom preset
+      if (currentBranding.preset === 'custom') {
+        document.getElementById('customColors').classList.add('active');
+        document.getElementById('customBg').value = currentBranding.colors.background;
+        document.getElementById('customAccent').value = currentBranding.colors.accent;
+        document.getElementById('customText').value = currentBranding.colors.text;
+      } else {
+        document.getElementById('customColors').classList.remove('active');
+      }
+
+      // Show logo preview if exists
+      if (currentBranding.logo) {
+        document.getElementById('logoPreview').innerHTML = `
+          <img src="${currentBranding.logo}" alt="Logo preview">
+          <p>Click to change logo</p>
+        `;
+      }
+
+      tempLogoData = currentBranding.logo;
+    }
+
+    function closeSettings() {
+      document.getElementById('settingsOverlay').classList.remove('active');
+      tempLogoData = null;
+    }
+
+    function closeSettingsOnOverlay(event) {
+      if (event.target === document.getElementById('settingsOverlay')) {
+        closeSettings();
+      }
+    }
+
+    // Logo upload handling
+    function handleLogoUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        tempLogoData = e.target.result;
+        document.getElementById('logoPreview').innerHTML = `
+          <img src="${tempLogoData}" alt="Logo preview">
+          <p>Click to change logo</p>
+        `;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Save branding
+    function saveBranding() {
+      const name = document.getElementById('brandNameInput').value || 'Document';
+      const selectedPreset = document.querySelector('input[name="colorPreset"]:checked').value;
+
+      let colors;
+      if (selectedPreset === 'custom') {
+        colors = {
+          background: document.getElementById('customBg').value,
+          accent: document.getElementById('customAccent').value,
+          text: document.getElementById('customText').value
+        };
+      } else {
+        colors = colorPresets[selectedPreset];
+      }
+
+      currentBranding = {
+        name: name,
+        logo: tempLogoData,
+        preset: selectedPreset,
+        colors: colors
+      };
+
+      localStorage.setItem('documentGeneratorBranding', JSON.stringify(currentBranding));
+      applyBrandingToUI();
+      closeSettings();
+
+      alert('Branding saved! Your documents will now use your custom branding.');
+    }
+
+    // Reset to default Draconic branding
+    function resetBranding() {
+      if (confirm('Reset to Draconic branding? This will remove your custom logo and colors.')) {
+        currentBranding = { ...defaultBranding };
+        localStorage.removeItem('documentGeneratorBranding');
+
+        // Reset UI
+        location.reload();
+      }
+    }
+
+    // Initialize branding on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      // Load saved branding
+      loadBranding();
+
+      // Logo drag and drop
+      const logoUploadArea = document.getElementById('logoUploadArea');
+      if (logoUploadArea) {
+        logoUploadArea.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          logoUploadArea.classList.add('drag-over');
+        });
+
+        logoUploadArea.addEventListener('dragleave', () => {
+          logoUploadArea.classList.remove('drag-over');
+        });
+
+        logoUploadArea.addEventListener('drop', (e) => {
+          e.preventDefault();
+          logoUploadArea.classList.remove('drag-over');
+          const file = e.dataTransfer.files[0];
+          if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+              tempLogoData = ev.target.result;
+              document.getElementById('logoPreview').innerHTML = `
+                <img src="${tempLogoData}" alt="Logo preview">
+                <p>Click to change logo</p>
+              `;
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+      }
+
+      // Color preset selection
+      document.querySelectorAll('.preset-option').forEach(option => {
+        option.addEventListener('click', function() {
+          document.querySelectorAll('.preset-option').forEach(opt => opt.classList.remove('selected'));
+          this.classList.add('selected');
+          this.querySelector('input').checked = true;
+
+          const preset = this.dataset.preset;
+          if (preset === 'custom') {
+            document.getElementById('customColors').classList.add('active');
+          } else {
+            document.getElementById('customColors').classList.remove('active');
+          }
+        });
+      });
+    });
+
+    // ========== END BRANDING SETTINGS ==========
+
     // File input change handler - FIXED: proper event handling
     document.getElementById('fileInput').addEventListener('change', function(e) {
       const file = this.files[0];
@@ -449,34 +1043,49 @@
       document.getElementById('uploadSection').style.display = 'none';
     }
 
-    // Shared HTML template builder
+    // Shared HTML template builder - now uses custom branding
     function buildFullHTML() {
       const content = document.getElementById('content').innerHTML;
-      const fileName = currentFileName || 'draconic-document';
+      const fileName = currentFileName || 'document';
+      const brandName = currentBranding.name;
+      const colors = currentBranding.colors;
+
+      // Build logo HTML - use custom logo or default Draconic SVG
+      let logoHTML;
+      if (currentBranding.logo) {
+        logoHTML = `<img src="${currentBranding.logo}" alt="${brandName}" style="max-height: 80px; max-width: 300px;">`;
+      } else {
+        // Default Draconic SVG logos with dynamic color
+        logoHTML = `
+          <svg style="width: 60px; height: auto;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80.42 95.44"><g fill-rule="evenodd"><rect fill="${colors.accent}" x="63.49" y="92.1" width="3.5" height="3.34"/><rect fill="${colors.accent}" x="63.49" y="8.03" width="3.5" height="5.66"/><rect fill="${colors.accent}" x="63.49" y="19.02" width="3.5" height="38.79"/><rect fill="${colors.accent}" x="70.5" y="13.7" width="3.5" height="9.42"/><rect fill="${colors.accent}" x="70.5" y="42.19" width="3.5" height="33.39"/><rect fill="${colors.accent}" x="42.11" y="23.12" width="3.5" height="38.88"/><rect fill="${colors.accent}" x="42.11" y="84.64" width="3.5" height="10.8"/><rect fill="${colors.accent}" x="42.11" y="8.03" width="3.5" height="2.42"/><rect fill="${colors.accent}" x="35.09" y="19.02" width="3.5" height="22.76"/><rect fill="${colors.accent}" x="35.09" y="45.64" width="3.5" height="16.36"/><rect fill="${colors.accent}" x="35.09" y="88.96" width="3.5" height="6.47"/><rect fill="${colors.accent}" x="35.09" y="72.65" width="3.5" height="2.93"/><rect fill="${colors.accent}" x="56.47" y="90.37" width="3.5" height="5.07"/><rect fill="${colors.accent}" x="56.47" y="2.99" width="3.5" height="59.01"/><rect fill="${colors.accent}" x="56.47" y="72.65" width="3.5" height="2.93"/><rect fill="${colors.accent}" x="76.92" y="19.02" width="3.5" height="8.21"/><rect fill="${colors.accent}" x="76.92" y="72.65" width="3.5" height="2.93"/><rect fill="${colors.accent}" x="28.08" y="13.7" width="3.5" height="27.06"/><rect fill="${colors.accent}" x="28.08" y="48.07" width="3.5" height="27.51"/><rect fill="${colors.accent}" x="28.08" y="92.02" width="3.5" height="3.42"/><rect fill="${colors.accent}" x="21.06" y="10.48" width="3.5" height="30.25"/><rect fill="${colors.accent}" x="21.06" y="88.74" width="3.5" height="6.7"/><rect fill="${colors.accent}" x="21.06" y="52.29" width="3.5" height="12.7"/><rect fill="${colors.accent}" x="14.04" y="82.36" width="3.5" height="10.17"/><rect fill="${colors.accent}" x="14.04" y="56.58" width="3.5" height="14.66"/><rect fill="${colors.accent}" x="14.04" y="13.7" width="3.5" height="28.73"/><rect fill="${colors.accent}" x="7.02" y="20.89" width="3.5" height="23.83"/><rect fill="${colors.accent}" x="7.02" y="62" width="3.5" height="26.74"/><rect fill="${colors.accent}" y="31.51" width="3.5" height="16.73"/><rect fill="${colors.accent}" x="49.45" y="29.57" width="3.5" height="46.02"/><rect fill="${colors.accent}" x="49.45" y="8.03" width="3.5" height="5.66"/><rect fill="${colors.accent}" x="49.13" y="88.74" width="3.5" height="6.7"/><rect fill="${colors.accent}" x="49.45" width="3.5" height="2.99"/></g></svg>
+          <svg style="width: 300px; height: auto;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 370.98 56.53"><g fill-rule="evenodd"><path fill="${colors.accent}" d="M42.4,3.53h-7.07V0H0v56.53h35.33v-3.53h7.07v-3.53h3.53V7.07h-3.53v-3.53ZM35.33,49.46h-3.53v3.53H10.6V3.53h21.2v3.53h3.53v42.4Z"/><polygon fill="${colors.accent}" points="286.19 0 286.19 38.86 282.65 38.86 282.65 31.8 279.12 31.8 279.12 24.73 275.59 24.73 275.59 17.67 272.05 17.67 272.05 10.6 268.52 10.6 268.52 3.53 264.99 3.53 264.99 0 254.39 0 254.39 56.53 264.99 56.53 264.99 14.13 268.52 14.13 268.52 21.2 272.05 21.2 272.05 28.27 275.59 28.27 275.59 35.33 279.12 35.33 279.12 42.4 282.65 42.4 282.65 49.46 286.19 49.46 286.19 56.53 296.79 56.53 296.79 0 286.19 0"/><polygon fill="${colors.accent}" points="144.86 3.53 141.33 3.53 141.33 0 113.06 0 113.06 3.53 109.53 3.53 109.53 7.07 106 7.07 106 56.53 116.59 56.53 116.59 31.8 120.13 31.8 120.13 28.27 116.59 28.27 116.59 7.07 120.13 7.07 120.13 3.53 134.26 3.53 134.26 7.07 137.79 7.07 137.79 28.27 134.26 28.27 134.26 31.8 137.79 31.8 137.79 56.53 148.39 56.53 148.39 7.07 144.86 7.07 144.86 3.53"/><rect fill="${colors.accent}" x="120.13" y="24.73" width="14.13" height="3.53"/><path fill="${colors.accent}" d="M95.4,3.53h-7.07V0h-35.33v56.53h10.6v-24.73h21.2v3.53h3.53v21.2h10.6v-17.67h-3.53v-3.53h-3.53v-3.53h-3.53v-3.53h7.07v-3.53h3.53V7.07h-3.53v-3.53ZM88.33,24.73h-3.53v3.53h-21.2V3.53h21.2v3.53h3.53v17.67Z"/><polygon fill="${colors.accent}" points="194.32 3.53 190.79 3.53 190.79 0 162.53 0 162.53 3.53 158.99 3.53 158.99 7.07 155.46 7.07 155.46 49.46 158.99 49.46 158.99 53 162.53 53 162.53 56.53 190.79 56.53 190.79 53 194.32 53 194.32 49.46 197.86 49.46 197.86 35.33 187.26 35.33 187.26 49.46 183.73 49.46 183.73 53 169.59 53 169.59 49.46 166.06 49.46 166.06 7.07 169.59 7.07 169.59 3.53 183.73 3.53 183.73 7.07 187.26 7.07 187.26 21.2 197.86 21.2 197.86 7.07 194.32 7.07 194.32 3.53"/><polygon fill="${colors.accent}" points="370.98 21.2 370.98 7.07 367.45 7.07 367.45 3.53 363.92 3.53 363.92 0 335.65 0 335.65 3.53 332.12 3.53 332.12 7.07 328.59 7.07 328.59 49.46 332.12 49.46 332.12 53 335.65 53 335.65 56.53 363.92 56.53 363.92 53 367.45 53 367.45 49.46 370.98 49.46 370.98 35.33 360.38 35.33 360.38 49.46 356.85 49.46 356.85 53 342.72 53 342.72 49.46 339.18 49.46 339.18 7.07 342.72 7.07 342.72 3.53 356.85 3.53 356.85 7.07 360.38 7.07 360.38 21.2 370.98 21.2"/><path fill="${colors.accent}" d="M243.79,3.53h-3.53V0h-28.27v3.53h-3.53v3.53h-3.53v42.4h3.53v3.53h3.53v3.53h28.27v-3.53h3.53v-3.53h3.53V7.07h-3.53v-3.53ZM236.72,49.46h-3.53v3.53h-14.13v-3.53h-3.53V7.07h3.53v-3.53h14.13v3.53h3.53v42.4Z"/><polygon fill="${colors.accent}" points="303.85 0 303.85 3.53 307.39 3.53 307.39 53 303.85 53 303.85 56.53 321.52 56.53 321.52 53 317.99 53 317.99 3.53 321.52 3.53 321.52 0 303.85 0"/></g></svg>
+        `;
+      }
+
+      // Compute a slightly lighter version of background for body
+      const bodyBg = adjustColor(colors.background, 20);
 
       return `<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Draconic - ${fileName}</title>
+  <title>${brandName} - ${fileName}</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200;12..96,400;12..96,700&display=swap');
 
     :root {
-      --draconic-orange: #FF6D00;
-      --draconic-dark: #1f1108;
-      --draconic-light: #f7d9cb;
-      --draconic-accent: #e2ab8d;
-      --draconic-brown-1: #54301e;
-      --draconic-brown-2: #825037;
+      --brand-accent: ${colors.accent};
+      --brand-dark: ${colors.background};
+      --brand-light: ${colors.text};
+      --brand-body: ${bodyBg};
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Bricolage Grotesque', sans-serif;
-      background: var(--draconic-brown-1);
-      color: var(--draconic-light);
+      background: var(--brand-body);
+      color: var(--brand-light);
       line-height: 1.8;
       max-width: 1200px;
       margin: 0 auto;
@@ -494,14 +1103,14 @@
     .content {
       font-size: 1.1rem;
       line-height: 1.8;
-      background: var(--draconic-dark);
+      background: var(--brand-dark);
       padding: 40px;
       border-radius: 8px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     }
 
     .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
-      color: var(--draconic-orange);
+      color: var(--brand-accent);
       margin-bottom: 20px;
       margin-top: 40px;
       font-weight: 700;
@@ -517,22 +1126,22 @@
     .content li { margin-bottom: 10px; }
 
     .content blockquote {
-      border-left: 4px solid var(--draconic-orange);
+      border-left: 4px solid var(--brand-accent);
       padding-left: 25px;
       font-style: italic;
       margin: 30px 0;
-      color: var(--draconic-accent);
+      opacity: 0.9;
     }
 
     .content code {
-      background: rgba(255, 109, 0, 0.1);
+      background: rgba(255, 255, 255, 0.1);
       padding: 3px 8px;
       border-radius: 4px;
       font-family: 'Courier New', monospace;
     }
 
     .content pre {
-      background: rgba(255, 109, 0, 0.1);
+      background: rgba(255, 255, 255, 0.1);
       padding: 20px;
       border-radius: 8px;
       overflow-x: auto;
@@ -540,8 +1149,8 @@
     }
 
     .content table { width: 100%; border-collapse: collapse; margin: 30px 0; }
-    .content th, .content td { border: 1px solid var(--draconic-brown-2); padding: 15px; text-align: left; }
-    .content th { background: var(--draconic-orange); color: var(--draconic-light); font-weight: 600; }
+    .content th, .content td { border: 1px solid rgba(255,255,255,0.2); padding: 15px; text-align: left; }
+    .content th { background: var(--brand-accent); color: var(--brand-light); font-weight: 600; }
 
     @media (max-width: 768px) {
       body { padding: 30px 20px; font-size: 1rem; }
@@ -553,8 +1162,7 @@
 <body>
   <div class="content">
     <div class="logo-container">
-      <svg style="width: 60px; height: auto;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80.42 95.44"><g fill-rule="evenodd"><rect fill="#ff6d00" x="63.49" y="92.1" width="3.5" height="3.34"/><rect fill="#ff6d00" x="63.49" y="8.03" width="3.5" height="5.66"/><rect fill="#ff6d00" x="63.49" y="19.02" width="3.5" height="38.79"/><rect fill="#ff6d00" x="70.5" y="13.7" width="3.5" height="9.42"/><rect fill="#ff6d00" x="70.5" y="42.19" width="3.5" height="33.39"/><rect fill="#ff6d00" x="42.11" y="23.12" width="3.5" height="38.88"/><rect fill="#ff6d00" x="42.11" y="84.64" width="3.5" height="10.8"/><rect fill="#ff6d00" x="42.11" y="8.03" width="3.5" height="2.42"/><rect fill="#ff6d00" x="35.09" y="19.02" width="3.5" height="22.76"/><rect fill="#ff6d00" x="35.09" y="45.64" width="3.5" height="16.36"/><rect fill="#ff6d00" x="35.09" y="88.96" width="3.5" height="6.47"/><rect fill="#ff6d00" x="35.09" y="72.65" width="3.5" height="2.93"/><rect fill="#ff6d00" x="56.47" y="90.37" width="3.5" height="5.07"/><rect fill="#ff6d00" x="56.47" y="2.99" width="3.5" height="59.01"/><rect fill="#ff6d00" x="56.47" y="72.65" width="3.5" height="2.93"/><rect fill="#ff6d00" x="76.92" y="19.02" width="3.5" height="8.21"/><rect fill="#ff6d00" x="76.92" y="72.65" width="3.5" height="2.93"/><rect fill="#ff6d00" x="28.08" y="13.7" width="3.5" height="27.06"/><rect fill="#ff6d00" x="28.08" y="48.07" width="3.5" height="27.51"/><rect fill="#ff6d00" x="28.08" y="92.02" width="3.5" height="3.42"/><rect fill="#ff6d00" x="21.06" y="10.48" width="3.5" height="30.25"/><rect fill="#ff6d00" x="21.06" y="88.74" width="3.5" height="6.7"/><rect fill="#ff6d00" x="21.06" y="52.29" width="3.5" height="12.7"/><rect fill="#ff6d00" x="14.04" y="82.36" width="3.5" height="10.17"/><rect fill="#ff6d00" x="14.04" y="56.58" width="3.5" height="14.66"/><rect fill="#ff6d00" x="14.04" y="13.7" width="3.5" height="28.73"/><rect fill="#ff6d00" x="7.02" y="20.89" width="3.5" height="23.83"/><rect fill="#ff6d00" x="7.02" y="62" width="3.5" height="26.74"/><rect fill="#ff6d00" y="31.51" width="3.5" height="16.73"/><rect fill="#ff6d00" x="49.45" y="29.57" width="3.5" height="46.02"/><rect fill="#ff6d00" x="49.45" y="8.03" width="3.5" height="5.66"/><rect fill="#ff6d00" x="49.13" y="88.74" width="3.5" height="6.7"/><rect fill="#ff6d00" x="49.45" width="3.5" height="2.99"/></g></svg>
-      <svg style="width: 300px; height: auto;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 370.98 56.53"><g fill-rule="evenodd"><path fill="#ff6d00" d="M42.4,3.53h-7.07V0H0v56.53h35.33v-3.53h7.07v-3.53h3.53V7.07h-3.53v-3.53ZM35.33,49.46h-3.53v3.53H10.6V3.53h21.2v3.53h3.53v42.4Z"/><polygon fill="#ff6d00" points="286.19 0 286.19 38.86 282.65 38.86 282.65 31.8 279.12 31.8 279.12 24.73 275.59 24.73 275.59 17.67 272.05 17.67 272.05 10.6 268.52 10.6 268.52 3.53 264.99 3.53 264.99 0 254.39 0 254.39 56.53 264.99 56.53 264.99 14.13 268.52 14.13 268.52 21.2 272.05 21.2 272.05 28.27 275.59 28.27 275.59 35.33 279.12 35.33 279.12 42.4 282.65 42.4 282.65 49.46 286.19 49.46 286.19 56.53 296.79 56.53 296.79 0 286.19 0"/><polygon fill="#ff6d00" points="144.86 3.53 141.33 3.53 141.33 0 113.06 0 113.06 3.53 109.53 3.53 109.53 7.07 106 7.07 106 56.53 116.59 56.53 116.59 31.8 120.13 31.8 120.13 28.27 116.59 28.27 116.59 7.07 120.13 7.07 120.13 3.53 134.26 3.53 134.26 7.07 137.79 7.07 137.79 28.27 134.26 28.27 134.26 31.8 137.79 31.8 137.79 56.53 148.39 56.53 148.39 7.07 144.86 7.07 144.86 3.53"/><rect fill="#ff6d00" x="120.13" y="24.73" width="14.13" height="3.53"/><path fill="#ff6d00" d="M95.4,3.53h-7.07V0h-35.33v56.53h10.6v-24.73h21.2v3.53h3.53v21.2h10.6v-17.67h-3.53v-3.53h-3.53v-3.53h-3.53v-3.53h7.07v-3.53h3.53V7.07h-3.53v-3.53ZM88.33,24.73h-3.53v3.53h-21.2V3.53h21.2v3.53h3.53v17.67Z"/><polygon fill="#ff6d00" points="194.32 3.53 190.79 3.53 190.79 0 162.53 0 162.53 3.53 158.99 3.53 158.99 7.07 155.46 7.07 155.46 49.46 158.99 49.46 158.99 53 162.53 53 162.53 56.53 190.79 56.53 190.79 53 194.32 53 194.32 49.46 197.86 49.46 197.86 35.33 187.26 35.33 187.26 49.46 183.73 49.46 183.73 53 169.59 53 169.59 49.46 166.06 49.46 166.06 7.07 169.59 7.07 169.59 3.53 183.73 3.53 183.73 7.07 187.26 7.07 187.26 21.2 197.86 21.2 197.86 7.07 194.32 7.07 194.32 3.53"/><polygon fill="#ff6d00" points="370.98 21.2 370.98 7.07 367.45 7.07 367.45 3.53 363.92 3.53 363.92 0 335.65 0 335.65 3.53 332.12 3.53 332.12 7.07 328.59 7.07 328.59 49.46 332.12 49.46 332.12 53 335.65 53 335.65 56.53 363.92 56.53 363.92 53 367.45 53 367.45 49.46 370.98 49.46 370.98 35.33 360.38 35.33 360.38 49.46 356.85 49.46 356.85 53 342.72 53 342.72 49.46 339.18 49.46 339.18 7.07 342.72 7.07 342.72 3.53 356.85 3.53 356.85 7.07 360.38 7.07 360.38 21.2 370.98 21.2"/><path fill="#ff6d00" d="M243.79,3.53h-3.53V0h-28.27v3.53h-3.53v3.53h-3.53v42.4h3.53v3.53h3.53v3.53h28.27v-3.53h3.53v-3.53h3.53V7.07h-3.53v-3.53ZM236.72,49.46h-3.53v3.53h-14.13v-3.53h-3.53V7.07h3.53v-3.53h14.13v3.53h3.53v42.4Z"/><polygon fill="#ff6d00" points="303.85 0 303.85 3.53 307.39 3.53 307.39 53 303.85 53 303.85 56.53 321.52 56.53 321.52 53 317.99 53 317.99 3.53 321.52 3.53 321.52 0 303.85 0"/></g></svg>
+      ${logoHTML}
     </div>
     ${content}
   </div>
@@ -562,9 +1170,19 @@
 </html>`;
     }
 
+    // Helper: adjust color brightness
+    function adjustColor(hex, percent) {
+      const num = parseInt(hex.replace('#', ''), 16);
+      const amt = Math.round(2.55 * percent);
+      const R = Math.min(255, Math.max(0, (num >> 16) + amt));
+      const G = Math.min(255, Math.max(0, (num >> 8 & 0x00FF) + amt));
+      const B = Math.min(255, Math.max(0, (num & 0x0000FF) + amt));
+      return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
+    }
+
     function generateHTML() {
       const fullHTML = buildFullHTML();
-      const fileName = currentFileName || 'draconic-document';
+      const fileName = currentFileName || 'document';
 
       const blob = new Blob([fullHTML], { type: 'text/html' });
       const url = URL.createObjectURL(blob);
@@ -585,7 +1203,7 @@
 
       try {
         const fullHTML = buildFullHTML();
-        const fileName = currentFileName || 'draconic-document';
+        const fileName = currentFileName || 'document';
 
         const response = await fetch('/api/generate-pdf', {
           method: 'POST',
