@@ -4,7 +4,7 @@
   "description": "Draconic brand document generator with HTML and PDF export",
   "private": true,
   "dependencies": {
-    "@sparticuz/chromium": "^119.0.0",
+    "@sparticuz/chromium-min": "^119.0.0",
     "puppeteer-core": "^21.5.0"
   }
 }
