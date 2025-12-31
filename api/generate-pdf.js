@@ -114,13 +114,25 @@ module.exports = async (req, res) => {
     const enhancedHTML = injectSmartPageBreaks(html);
 
     // Use remote chromium binary for Vercel serverless
+    // Using Sparticuz official release - more reliable
+    const executablePath = await chromium.executablePath(
+      'https://github.com/nicholaschiang/chromium/releases/download/v122.0.0/chromium-v122.0.0-pack.tar'
+    );
+
     browser = await puppeteer.launch({
-      args: chromium.args,
+      args: [
+        ...chromium.args,
+        '--disable-gpu',
+        '--disable-dev-shm-usage',
+        '--disable-setuid-sandbox',
+        '--no-first-run',
+        '--no-sandbox',
+        '--no-zygote',
+        '--single-process',
+      ],
       defaultViewport: chromium.defaultViewport,
-      executablePath: await chromium.executablePath(
-        'https://github.com/nicholaschiang/chromium/releases/download/v122.0.0/chromium-v122.0.0-pack.tar'
-      ),
-      headless: chromium.headless,
+      executablePath,
+      headless: 'new',
     });
 
     const page = await browser.newPage();

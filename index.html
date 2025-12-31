@@ -1212,8 +1212,27 @@
         });
 
         if (!response.ok) {
-          const error = await response.json();
-          throw new Error(error.details || 'PDF generation failed');
+          let errorMessage = 'PDF generation failed';
+          try {
+            const errorText = await response.text();
+            // Try to parse as JSON first
+            try {
+              const errorJson = JSON.parse(errorText);
+              errorMessage = errorJson.details || errorJson.error || errorMessage;
+            } catch {
+              // If not JSON, check for common Vercel errors
+              if (errorText.includes('FUNCTION_INVOCATION_TIMEOUT')) {
+                errorMessage = 'Server timeout - document may be too large. Try a smaller document.';
+              } else if (errorText.includes('FUNCTION_INVOCATION_FAILED')) {
+                errorMessage = 'Server error - please try again in a moment.';
+              } else {
+                errorMessage = errorText.substring(0, 200) || errorMessage;
+              }
+            }
+          } catch (e) {
+            // Ignore text parsing errors
+          }
+          throw new Error(errorMessage);
         }
 
         const blob = await response.blob();
