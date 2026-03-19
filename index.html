@@ -234,6 +234,15 @@
       font-weight: 300;
     }
 
+    .content-preview a {
+      color: var(--draconic-orange);
+      text-decoration: none;
+    }
+
+    .content-preview a:hover {
+      text-decoration: underline;
+    }
+
     .generator-header h1, .preview-header h2, .upload-section h2 {
       font-family: 'Reckless', Georgia, serif;
       font-weight: 300;
@@ -1071,6 +1080,10 @@
 
     function displayPreview(htmlContent) {
       document.getElementById('content').innerHTML = htmlContent;
+      // Auto-generate heading IDs for anchor links
+      document.querySelectorAll('.content-preview h1, .content-preview h2, .content-preview h3').forEach(h => {
+        h.id = h.textContent.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim();
+      });
       document.getElementById('preview').style.display = 'block';
       document.getElementById('uploadSection').style.display = 'none';
     }
@@ -1169,6 +1182,8 @@
     .content h4 { font-size: 1.3rem; }
 
     .content p { margin-bottom: 20px; text-align: left; }
+    .content a { color: var(--brand-accent); text-decoration: none; }
+    .content a:hover { text-decoration: underline; }
     .content ul, .content ol { margin-left: 30px; margin-bottom: 20px; }
     .content li { margin-bottom: 10px; }
 
