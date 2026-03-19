@@ -1322,6 +1322,13 @@
     // Drag and drop functionality
     const uploadSection = document.getElementById('uploadSection');
 
+    uploadSection.addEventListener('click', (e) => {
+      // Don't double-trigger if they clicked the label/button directly
+      if (e.target.tagName !== 'LABEL' && e.target.tagName !== 'INPUT') {
+        document.getElementById('fileInput').click();
+      }
+    });
+
     uploadSection.addEventListener('dragover', (e) => {
       e.preventDefault();
       uploadSection.classList.add('drag-over');
