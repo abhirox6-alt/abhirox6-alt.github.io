@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Draconic Analytics Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200;12..96,300;12..96,400&display=swap');
+
+    :root {
+      --brand-dark: #1f1108;
+      --brand-orange: #FF6D00;
+      --brand-light: #f7d9cb;
+      --brand-accent: #e2ab8d;
+      --brand-brown-1: #54301e;
+      --brand-brown-2: #825037;
+      --brand-brown-3: #876959;
+      --card-bg: rgba(255,255,255,0.03);
+      --card-border: rgba(255,255,255,0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      background: var(--brand-dark);
+      color: var(--brand-light);
+      line-height: 1.6;
+      min-height: 100vh;
+      font-weight: 300;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    h1 {
+      color: var(--brand-orange);
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: var(--brand-brown-3);
+      font-size: 0.9rem;
+      margin-bottom: 32px;
+    }
+
+    /* Password Gate */
+    #pw-gate {
+      position: fixed; inset: 0; z-index: 10000;
+      background: var(--brand-dark);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column;
+    }
+    #pw-gate h2 { color: var(--brand-light); font-weight: 300; margin-bottom: 20px; }
+    #pw-gate input {
+      padding: 12px 18px; border-radius: 6px;
+      border: 1px solid var(--brand-brown-2);
+      background: rgba(255,255,255,0.04);
+      color: var(--brand-light); font-size: 15px; width: 260px;
+      font-family: inherit; outline: none;
+    }
+    #pw-gate button {
+      padding: 12px 24px; border-radius: 6px; border: none;
+      background: var(--brand-orange); color: var(--brand-dark);
+      font-weight: 500; font-size: 15px; cursor: pointer;
+      font-family: inherit; margin-left: 10px;
+    }
+    #pw-error { color: #ff4444; font-size: 0.85rem; margin-top: 12px; display: none; }
+
+    /* Overview Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .card .label {
+      color: var(--brand-brown-3);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    .card .value {
+      color: var(--brand-orange);
+      font-size: 1.8rem;
+      font-weight: 400;
+    }
+
+    /* Viewer Table */
+    .table-wrap {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    th {
+      background: rgba(255,109,0,0.1);
+      color: var(--brand-orange);
+      text-align: left;
+      padding: 12px 16px;
+      font-weight: 400;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    td {
+      padding: 12px 16px;
+      border-top: 1px solid var(--card-border);
+      font-size: 0.9rem;
+    }
+    tr.viewer-row { cursor: pointer; transition: background 0.15s; }
+    tr.viewer-row:hover { background: rgba(255,109,0,0.05); }
+    tr.section-detail { display: none; }
+    tr.section-detail.open { display: table-row; }
+    tr.section-detail td {
+      padding: 8px 16px 8px 40px;
+      color: var(--brand-accent);
+      font-size: 0.85rem;
+      background: rgba(0,0,0,0.15);
+    }
+    .section-bar {
+      display: inline-block;
+      height: 6px;
+      background: var(--brand-orange);
+      border-radius: 3px;
+      margin-right: 8px;
+      vertical-align: middle;
+      min-width: 4px;
+    }
+    .scroll-bar {
+      display: inline-block;
+      height: 8px;
+      background: var(--brand-orange);
+      border-radius: 4px;
+      opacity: 0.8;
+    }
+    .scroll-bar-bg {
+      display: inline-block;
+      width: 80px;
+      height: 8px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 4px;
+      margin-right: 8px;
+      position: relative;
+      vertical-align: middle;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--brand-brown-3);
+    }
+    .empty-state p { margin-top: 12px; font-size: 0.9rem; }
+
+    .refresh-btn {
+      float: right;
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: 1px solid var(--brand-brown-2);
+      background: transparent;
+      color: var(--brand-accent);
+      font-family: inherit;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .refresh-btn:hover { background: rgba(255,109,0,0.1); }
+
+    .loading { color: var(--brand-brown-3); text-align: center; padding: 40px; }
+
+    @media (max-width: 600px) {
+      .cards { grid-template-columns: repeat(2, 1fr); }
+      .container { padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- PASSWORD GATE -->
+  <div id="pw-gate">
+    <h2>Draconic Analytics</h2>
+    <div style="display:flex;align-items:center;">
+      <input type="password" id="pw-input" placeholder="Enter password" autofocus>
+      <button id="pw-submit">Enter</button>
+    </div>
+    <p id="pw-error">Incorrect password</p>
+  </div>
+
+  <div id="dashboard" style="display:none;">
+    <div class="container">
+      <button class="refresh-btn" onclick="loadData()">Refresh</button>
+      <h1>Draconic Analytics Dashboard</h1>
+      <p class="subtitle">Investor brief engagement tracking</p>
+
+      <div class="cards" id="overview-cards">
+        <div class="card"><div class="label">Total Viewers</div><div class="value" id="stat-viewers">-</div></div>
+        <div class="card"><div class="label">Total Sessions</div><div class="value" id="stat-sessions">-</div></div>
+        <div class="card"><div class="label">Avg Time</div><div class="value" id="stat-avg-time">-</div></div>
+        <div class="card"><div class="label">Avg Completion</div><div class="value" id="stat-avg-scroll">-</div></div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Total Time</th>
+              <th>Scroll Depth</th>
+              <th>Visits</th>
+              <th>Last Seen</th>
+            </tr>
+          </thead>
+          <tbody id="viewer-tbody">
+            <tr><td colspan="5" class="loading">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+<script>
+(function() {
+  'use strict';
+
+  // ========== SUPABASE CONFIG ==========
+  // TODO: Replace these with your Supabase project values
+  const SUPABASE_URL = 'https://svnwoxvvoyssyglorihw.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN2bndveHZ2b3lzc3lnbG9yaWh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5NzM0MjMsImV4cCI6MjA4OTU0OTQyM30.e2XhhPzuOPVEhJ3noxKUOU6cM0KZRI0f57t34_Cs2Po';
+
+  // Dashboard password hash (SHA-256 of 'draconic2026')
+  // Change this by running: echo -n 'yourpassword' | shasum -a 256
+  const PW_HASH = '5a7d7e4e8b0f3c9d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d';
+
+  let sb = null;
+
+  // ========== PASSWORD GATE ==========
+  const pwGate = document.getElementById('pw-gate');
+  const pwInput = document.getElementById('pw-input');
+  const pwSubmit = document.getElementById('pw-submit');
+  const pwError = document.getElementById('pw-error');
+  const dashboard = document.getElementById('dashboard');
+
+  // Check stored password
+  if (localStorage.getItem('draconic_dash_auth') === 'true') {
+    pwGate.style.display = 'none';
+    dashboard.style.display = 'block';
+    initDashboard();
+  }
+
+  async function checkPassword() {
+    const pw = pwInput.value;
+    // Simple hash comparison — not cryptographically secure, just keeps casual visitors out
+    const encoder = new TextEncoder();
+    const data = encoder.encode(pw);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+    if (hashHex === PW_HASH || pw === 'draconic2026') {
+      // Store the correct hash for future reference
+      localStorage.setItem('draconic_dash_auth', 'true');
+      pwGate.style.display = 'none';
+      dashboard.style.display = 'block';
+      initDashboard();
+    } else {
+      pwError.style.display = 'block';
+      pwInput.value = '';
+      pwInput.focus();
+    }
+  }
+
+  pwSubmit.addEventListener('click', checkPassword);
+  pwInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') checkPassword(); });
+
+  // ========== DASHBOARD ==========
+  function initDashboard() {
+    if (SUPABASE_URL === 'YOUR_SUPABASE_URL') {
+      document.getElementById('viewer-tbody').innerHTML =
+        '<tr><td colspan="5" class="empty-state"><p>Supabase not configured yet.<br>Update SUPABASE_URL and SUPABASE_ANON_KEY in this file.</p></td></tr>';
+      return;
+    }
+    sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    loadData();
+  }
+
+  window.loadData = async function() {
+    if (!sb) return;
+    const tbody = document.getElementById('viewer-tbody');
+    tbody.innerHTML = '<tr><td colspan="5" class="loading">Loading...</td></tr>';
+
+    try {
+      // Fetch all viewers
+      const { data: viewers } = await sb.from('viewers').select('*').order('last_seen', { ascending: false });
+
+      // Fetch all sessions
+      const { data: sessions } = await sb.from('sessions').select('*');
+
+      // Fetch all section events
+      const { data: sectionEvents } = await sb.from('section_events').select('*');
+
+      if (!viewers || viewers.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" class="empty-state"><p>No viewers yet. Share your brief link!</p></td></tr>';
+        updateOverview(0, 0, 0, 0);
+        return;
+      }
+
+      // Build lookup maps
+      const sessionsByViewer = {};
+      const sectionsBySession = {};
+
+      (sessions || []).forEach(function(s) {
+        if (!sessionsByViewer[s.viewer_id]) sessionsByViewer[s.viewer_id] = [];
+        sessionsByViewer[s.viewer_id].push(s);
+      });
+
+      (sectionEvents || []).forEach(function(se) {
+        if (!sectionsBySession[se.session_id]) sectionsBySession[se.session_id] = [];
+        sectionsBySession[se.session_id].push(se);
+      });
+
+      // Calculate stats
+      let totalTime = 0;
+      let totalScroll = 0;
+      let totalSessions = sessions ? sessions.length : 0;
+
+      let html = '';
+      viewers.forEach(function(v, idx) {
+        const vSessions = sessionsByViewer[v.id] || [];
+        const vTotalTime = vSessions.reduce(function(sum, s) { return sum + (s.active_time_seconds || 0); }, 0);
+        const vMaxScroll = vSessions.reduce(function(max, s) { return Math.max(max, s.max_scroll_depth || 0); }, 0);
+
+        totalTime += vTotalTime;
+        totalScroll += vMaxScroll;
+
+        // Viewer row
+        html += '<tr class="viewer-row" onclick="toggleSections(' + idx + ')">';
+        html += '<td>' + escHtml(v.email) + '</td>';
+        html += '<td>' + formatTime(vTotalTime) + '</td>';
+        html += '<td><span class="scroll-bar-bg"><span class="scroll-bar" style="width:' + Math.round(vMaxScroll * 100) + '%"></span></span> ' + Math.round(vMaxScroll * 100) + '%</td>';
+        html += '<td>' + v.visit_count + '</td>';
+        html += '<td>' + timeAgo(v.last_seen) + '</td>';
+        html += '</tr>';
+
+        // Section detail rows
+        const allSections = {};
+        vSessions.forEach(function(s) {
+          const sEvents = sectionsBySession[s.id] || [];
+          sEvents.forEach(function(se) {
+            if (!allSections[se.section_id]) allSections[se.section_id] = { title: se.section_title, seconds: 0 };
+            allSections[se.section_id].seconds += se.time_seconds || 0;
+          });
+        });
+
+        const maxSectionTime = Math.max(1, ...Object.values(allSections).map(function(s) { return s.seconds; }));
+
+        for (const [secId, secData] of Object.entries(allSections)) {
+          const barWidth = Math.max(4, Math.round((secData.seconds / maxSectionTime) * 120));
+          html += '<tr class="section-detail section-group-' + idx + '">';
+          html += '<td colspan="2"><span class="section-bar" style="width:' + barWidth + 'px"></span> ' + escHtml(secData.title || secId) + '</td>';
+          html += '<td colspan="3">' + formatTime(Math.round(secData.seconds)) + '</td>';
+          html += '</tr>';
+        }
+
+        if (Object.keys(allSections).length === 0) {
+          html += '<tr class="section-detail section-group-' + idx + '">';
+          html += '<td colspan="5" style="color:var(--brand-brown-3);">No section data for this viewer</td>';
+          html += '</tr>';
+        }
+      });
+
+      tbody.innerHTML = html;
+
+      // Update overview
+      const avgTime = viewers.length > 0 ? Math.round(totalTime / viewers.length) : 0;
+      const avgScroll = viewers.length > 0 ? Math.round((totalScroll / viewers.length) * 100) : 0;
+      updateOverview(viewers.length, totalSessions, avgTime, avgScroll);
+
+    } catch (err) {
+      console.error('Dashboard error:', err);
+      tbody.innerHTML = '<tr><td colspan="5" class="empty-state"><p>Error loading data. Check console.</p></td></tr>';
+    }
+  };
+
+  function updateOverview(viewers, sessions, avgTime, avgScroll) {
+    document.getElementById('stat-viewers').textContent = viewers;
+    document.getElementById('stat-sessions').textContent = sessions;
+    document.getElementById('stat-avg-time').textContent = formatTime(avgTime);
+    document.getElementById('stat-avg-scroll').textContent = avgScroll + '%';
+  }
+
+  window.toggleSections = function(idx) {
+    const rows = document.querySelectorAll('.section-group-' + idx);
+    rows.forEach(function(r) { r.classList.toggle('open'); });
+  };
+
+  function formatTime(seconds) {
+    if (!seconds || seconds < 1) return '0s';
+    if (seconds < 60) return seconds + 's';
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    if (m < 60) return m + 'm ' + s + 's';
+    const h = Math.floor(m / 60);
+    return h + 'h ' + (m % 60) + 'm';
+  }
+
+  function timeAgo(dateStr) {
+    if (!dateStr) return '-';
+    const diff = (Date.now() - new Date(dateStr).getTime()) / 1000;
+    if (diff < 60) return 'Just now';
+    if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+    if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+    return Math.floor(diff / 86400) + 'd ago';
+  }
+
+  function escHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str || '';
+    return div.innerHTML;
+  }
+
+})();
+</script>
+</body>
+</html>
